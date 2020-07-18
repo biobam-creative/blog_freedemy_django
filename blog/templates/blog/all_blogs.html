@@ -1,0 +1,184 @@
+
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Freedemy | Free Udemy Courses{% endblock %}
+{% block meta_description %} Get Free Tutorials and Courses {% endblock %}
+
+{% block content %}
+    <!-- Page Content -->
+    <!-- Banner Starts Here -->
+    <div class="heading-page header-text">
+      <section class="page-heading">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="text-content">
+                <h4>Recent Courses</h4>
+                <h2>All Courses</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
+    <!-- Banner Ends Here -->
+
+    {% comment %} <section class="call-to-action">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="main-content">
+              <div class="row">
+                <div class="col-lg-8">
+                  <span>Stand Blog HTML5 Template</span>
+                  <h4>Creative HTML Template For Bloggers!</h4>
+                </div>
+                <div class="col-lg-4">
+                  <div class="main-button">
+                    <a href="https://templatemo.com/tm-551-stand-blog" target="_parent">Download Now!</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+ {% endcomment %}
+
+    <section class="blog-posts grid-system">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8">
+            <div class="all-blog-posts">
+              <div class="row">
+              {% for recent_post in recent_posts %}
+                <div class="col-lg-6">
+                  <div class="blog-post">
+                    <div class="blog-thumb">
+                      <a href="{% url 'blog:blog_detail' recent_post.slug %}"><img src="{{ recent_post.image.url }}" alt=""></a>
+                    </div>
+                    <div class="down-content">
+                      <span>{{ recent_post.category }}</span>
+                      <a href="{% url 'blog:blog_detail' recent_post.slug %}"><h4>{{ recent_post.title }}</h4></a>
+                      <ul class="post-info">
+                        <li><a href="#">{{ recent_post.author }}</a></li>
+                        <li><a href="#">{{ recent_post.date}}</a></li>
+                        
+                      </ul>
+                      <p>{{ recent_post.body|safe|truncatechars:100 }}.</p>
+                      <div class="post-options">
+                        <div class="row">
+                          <div class="col-lg-12">
+                            <ul class="post-tags">
+                              <li><i class="fa fa-tags"></i></li>
+                              {% for tag in recent_post.tags.all %}
+                                <li><a href="{% url 'blog:tagged' tag.slug%}">{{ tag }}</a>,</li>
+                              {% endfor %}
+                            </ul>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+                {% endfor %}
+                
+
+                {% if recent_posts.has_other_pages %}
+                <div class="col-lg-12">
+                  <ul class="page-numbers">
+                    {% if recent_posts.has_previous %}
+                    <li><a href="?page={{ recent_posts.previous_page_number }}"><i class="fa fa-angle-double-left"></i></a></li>
+                    {% else %}
+                    <li class="disabled"><i class="fa fa-angle-double-left"></i></li>
+                    {% endif %}
+                    {% for i in recent_posts.paginator.page_range %}
+                    {% if recent_posts.number == i %}
+                    <li>{{ i }}</li>
+                    {% else %}
+                    <li><a href="?page={{ i }}">{{ i }}</a></li>
+                    {% endif %}
+                    {% endfor %}
+                    {% if recent_posts.has_next %}
+                    <li><a href="?page={{ recent_posts.next_page_number }}"><i class="fa fa-angle-double-right"></i></a></li>
+                    {% else %}
+                    <li class="disabled"><i class="fa fa-angle-double-right"></i></li>
+                    {% endif %}
+                  </ul>
+                </div>
+                {% endif %}
+                
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="sidebar">
+              <div class="row">
+                <div class="col-lg-12">
+                  <div class="sidebar-item search">
+                    <form id="search_form" name="gs" method="GET" action="#">
+                      <input type="text" name="search" class="searchText" placeholder="type to search..." autocomplete="on" value="{{ search_term }}">
+                    </form>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item recent-posts">
+                    <div class="sidebar-heading">
+                      <h2>Recent Posts</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                      {% for recent_post in recent_posts|slice:"0:3" %}
+                        <li><a href="{% url 'blog:blog_detail' recent_post.slug %}">
+                          <h5>{{ recent_post.title }}</h5>
+                          <span>{{ recent_post.date }}</span>
+                        </a></li>
+                      {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item categories">
+                    <div class="sidebar-heading">
+                      <h2>Categories</h2>
+                    </div>
+                    <div class="content">
+                      <ul>
+                      {% for category in categories %}
+                        <li><a href="{% url 'blog:category' category.id %}">- {{ category.name }} </a></li>
+                        
+                      {% endfor %}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-lg-12">
+                  <div class="sidebar-item tags">
+                    <div class="sidebar-heading">
+                      <h2>Tag Clouds</h2>
+                    </div>
+                    <div class="content">
+                       {% for common_tag in common_tags %}
+                        <ul>
+                          <li><a href="{% url 'blog:tagged' common_tag.slug%}">{{ common_tag }}</a></li>
+                      
+                        </ul>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {% endblock %}
+
+    
+   
