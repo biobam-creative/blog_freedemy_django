@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Blog, Category
+from .models import *
 
 
 admin.site.register(Blog)
 admin.site.register(Category)
+admin.site.register(Opportunity)
+
 
 # Register your models here.
