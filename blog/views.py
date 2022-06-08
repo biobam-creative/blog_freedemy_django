@@ -190,9 +190,9 @@ from taggit.models import Tag
 #     return render(request, 'blog/contact.html', {'form': form})
 
 class StandardResultsSetPagination(PageNumberPagination):
-    page_size = 4
+    page_size = 12
     page_size_query_param = 'page_number'
-    max_page_size = 4
+    max_page_size = 12
 
 class BlogView(ListAPIView):
     permission_classes = (permissions.AllowAny,)

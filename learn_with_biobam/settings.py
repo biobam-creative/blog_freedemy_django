@@ -23,10 +23,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 't!%0ts&r$x05)vtkg=eqv0d9$xc-i+*5s61%(3vy3qi@s!p9ao'
+SECRET_KEY = os.environ.get('FREEDEMIA_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -134,7 +134,7 @@ REST_FRAMEWORK = {
         'rest_framework.authentication.TokenAuthentication'
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 4
+    'PAGE_SIZE': 12
 }
 
 
@@ -155,8 +155,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-PDF_URL = '/pdf/'
-PDF_ROOT = os.path.join(BASE_DIR, 'pdf_dir')
 
 
 # email Settings
@@ -167,7 +165,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
 
 CORS_ALLOWED_ORIGINS = [
-    
+    "http://localhost:8000"
 ]
 
 django_heroku.settings(locals())
