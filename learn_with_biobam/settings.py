@@ -167,7 +167,7 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:8000"
+    "http://localhost:3000"
 ]
 
 django_heroku.settings(locals())
