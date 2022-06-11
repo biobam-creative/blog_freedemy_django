@@ -197,7 +197,7 @@ class StandardResultsSetPagination(PageNumberPagination):
 class BlogView(ListAPIView):
     permission_classes = (permissions.AllowAny,)
 
-    queryset = Blog.objects.all()
+    queryset = Blog.objects.order_by('-date')
     serializer_class = BlogSerializer
 
     pagination_class = StandardResultsSetPagination
