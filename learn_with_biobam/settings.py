@@ -14,9 +14,7 @@ import os
 import django_heroku
 import dj_database_url
 from decouple import config
-import cloudinary
-import cloudinary.uploader
-import cloudinary.api
+
 
 
 
@@ -72,6 +70,10 @@ MIDDLEWARE = [
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
+
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 
 cloudinary.config( 
