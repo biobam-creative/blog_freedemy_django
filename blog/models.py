@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from ckeditor.fields import RichTextField
 from taggit.managers import TaggableManager
+from cloudinary.models import CloudinaryField
 
 from django.template.defaultfilters import slugify
 
@@ -15,7 +16,7 @@ class Category(models.Model):
 
 class Blog(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='blog/images/')
+    image = CloudinaryField('image')
     date = models.DateTimeField()
     body = RichTextField(blank=True, null=True)
     slug = models.SlugField(unique=True, max_length=100, blank=True)
@@ -34,7 +35,7 @@ class Blog(models.Model):
 
 class Opportunity(models.Model):
     title = models.CharField(max_length=255)
-    image = models.ImageField(upload_to='blog/images/')
+    image = CloudinaryField('image')
     date = models.DateTimeField()
     closing_date = models.DateTimeField()
     body = RichTextField(blank=True, null=True)
