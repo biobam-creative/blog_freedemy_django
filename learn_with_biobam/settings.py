@@ -30,7 +30,7 @@ SECRET_KEY = os.environ.get('FREEDEMIA_SECRET')
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['localhost']
 
@@ -68,7 +68,7 @@ MIDDLEWARE = [
 ]
 
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+SECURE_PROXY_SSL_HEADER = None #('HTTP_X_FORWARDED_PROTO', 'https')
 SECURE_SSL_REDIRECT = True
 
 import cloudinary
@@ -81,6 +81,7 @@ cloudinary.config(
   api_key = os.environ.get('CLOUDINARY_API_KEY'), 
   api_secret = os.environ.get('CLOUDINARY_API_SECRET') 
 )
+
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 
 # LOGGING = {
@@ -221,7 +222,8 @@ EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASSWORD')
 EMAIL_USE_TLS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:3000"
+    "http://localhost:3000",
+    "freedemia.herokuapp.com"
 ]
 
 django_heroku.settings(locals())
