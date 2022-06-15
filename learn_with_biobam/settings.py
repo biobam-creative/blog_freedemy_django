@@ -223,7 +223,7 @@ EMAIL_USE_TLS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
-    "freedemia.herokuapp.com"
+    "https://freedemia.herokuapp.com"
 ]
 
 django_heroku.settings(locals())
